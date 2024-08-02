@@ -1,0 +1,27 @@
+import time
+
+def speed_test(func):
+    """
+    A decorator that prints the execution time of the function it decorates.
+    """
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"Function '{func.__name__}' executed in {elapsed_time:.6f} seconds")
+        return result
+    return wrapper
+
+@speed_test
+def example_function(n):
+    """
+    Example function that sums numbers from 0 to n-1.
+    """
+    total = 0
+    for i in range(n):
+        total += i
+    return total
+
+# Run the example function with a parameter
+example_function(1000000)
